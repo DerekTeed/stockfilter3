@@ -24,7 +24,7 @@ app.use(express.static("./client/public/index.html"));
 // Routes
 // =============================================================
 require("./routes/api-routes.js")(app);
-require("./config/config.json")(app);
+require("./config/config.json");
 
 //require("./routes/html-routes.js")(app);
 
