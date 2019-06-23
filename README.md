@@ -1,0 +1,1 @@
+# stockfilter3
