@@ -27,7 +27,7 @@ app.get("/api/stocks", function(req, res) {
     });
 });
 
-  // // GET route for getting all of the Stockss
+  // // GET route for getting all of the Stocks
   // app.get("/api/Stockss/", function(req, res) {
   //   db.Stocks.findAll({})
   //     .then(function(dbStocks) {
