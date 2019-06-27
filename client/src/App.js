@@ -1,5 +1,7 @@
 import React from 'react';
 import NavBar from "./components/Navbar/NavBar";
+import Jumbotron from "./components/Jumbotron/Jumbotron";
+import Body from "./components/Body/Body";
 
 // import logo from './logo.svg';
 // import './App.css';
@@ -34,6 +36,8 @@ function App() {
     <div className="App">
       <header>
         <NavBar />
+        <Jumbotron />
+        <Body />
       </header>
     </div>
   );
