@@ -1,6 +1,14 @@
 import React from 'react';
 import NavBar from "./components/Navbar/NavBar";
 
+// import the React Router components, and the Profile page component
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import Profile from "./components/Profile";
+
+// import the PrivateRoute component
+import PrivateRoute from "./components/PrivateRoute";
+
+
 // import logo from './logo.svg';
 // import './App.css';
 
@@ -32,9 +40,16 @@ import NavBar from "./components/Navbar/NavBar";
 function App() {
   return (
     <div className="App">
-      <header>
-        <NavBar />
-      </header>
+      {/* New - use BrowserRouter to provide access to /profile */}
+      <BrowserRouter>
+        <header>
+          <NavBar />
+        </header>
+        <Switch>
+          <Route path="/" exact />
+          <PrivateRoute path="/profile" component={Profile} />
+        </Switch>
+      </BrowserRouter>
     </div>
   );
 }
