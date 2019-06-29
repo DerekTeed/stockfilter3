@@ -2,6 +2,9 @@ import React from 'react';
 import NavBar from "./components/Navbar/NavBar";
 import Jumbotron from "./components/Jumbotron/Jumbotron";
 import Body from "./components/Body/Body";
+// import Card30 from "./components/Card30/Card30";
+// import Profs from "./components/Profs/Profs";
+import Input from "./components/Input/Input";
 
 // import the React Router components, and the Profile page component
 import { BrowserRouter, Route, Switch } from "react-router-dom";
@@ -54,6 +57,8 @@ function App() {
       </BrowserRouter>
               <Jumbotron />
               <Body />
+              {/* <Card30 /> */}
+              <Input />
     </div >
   );
 }
