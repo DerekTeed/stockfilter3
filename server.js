@@ -10,6 +10,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
+const http = require('http');
 
 var app = express();
 
@@ -22,6 +23,11 @@ var sess = {
   resave: false,
   saveUninitialized: true
 };
+
+// development only
+// if ('development' === app.get('env')) {
+//   app.use(express.errorHandler());
+// };
 
 if (app.get("env") === "production") {
   sess.cookie.secure = true; // serve secure cookies, requires https
@@ -115,7 +121,12 @@ require("./config/config.json");
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
 db.sequelize.sync({ force: true }).then(function () {
-  app.listen(PORT, function () {
+  http.createServer(app).listen(PORT, function () {
     console.log("App listening on PORT " + PORT);
   });
 });
+// db.sequelize.sync().then(function() {
+//   http.createServer(app).listen(app.get('port'), function(){
+//     console.log('Express server listening on port ' + app.get('port'));
+//   });
+// });
