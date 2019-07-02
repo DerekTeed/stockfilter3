@@ -1,7 +1,11 @@
 import React from 'react';
 import NavBar from "./components/Navbar/NavBar";
-import Jumbotron from "./components/Jumbotron/Jumbotron";
+import Login from "./Pages/Login";
 import Body from "./components/Body/Body";
+import Form from "./components/Form/Form";
+import "./style.css";
+// import { useAuth0 } from "../../react-auth0-wrapper";
+
 
 // import the React Router components, and the Profile page component
 import { BrowserRouter, Route, Switch } from "react-router-dom";
@@ -48,12 +52,10 @@ function App() {
           <NavBar />
         </header>
         <Switch>
-          <Route path="/" exact />
+          <Route path="/" component={Login} />
           <PrivateRoute path="/profile" component={Profile} />
         </Switch>
       </BrowserRouter>
-              <Jumbotron />
-              <Body />
     </div >
   );
 }
