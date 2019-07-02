@@ -51,10 +51,11 @@ function App() {
           <NavBar />
         </header>
         <Switch>
-          <Route path="/" component={Login} />
-          <PrivateRoute exact path="/profile" component={Profile} />
+          {/*route must have 'exact' parameter specified */}
+          <Route path="/" exact component={Login}/>
+          <PrivateRoute path="/profile" component={Profile} />
           {/* NEW - add a route to the ExternalApi component */}
-          <PrivateRoute exact path="/external-api" component={ExternalApi} />
+          <PrivateRoute path="/external-api" component={ExternalApi} />
         </Switch>
       </BrowserRouter>
     </div >

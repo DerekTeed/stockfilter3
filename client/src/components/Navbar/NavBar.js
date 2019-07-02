@@ -8,7 +8,7 @@ const NavBar = () => {
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-dark">
-            
+
                 {!isAuthenticated && (
                     <button type="button" className="btn btn-success"
                         onClick={() =>
@@ -29,11 +29,11 @@ const NavBar = () => {
 
                 }
                 <span>
-                    <Link to="/external-api">External API</Link>
                     <Link to="/">Home</Link>
                     <Link to="/profile">Profile</Link>
+                    <Link to="/external-api">External API</Link>
                 </span>
-            
+
         </nav>
     );
 };
