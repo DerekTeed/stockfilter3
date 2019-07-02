@@ -150,7 +150,7 @@ module.exports = function (app) {
 
   // Create a new example
   app.get("/api/report/allstocks", async function (req, res) {
-    console.log("Derek, here is the API Key: ", process.env.EOD_KEY);
+    
     //getAllStockData()
     getAllStockData()
 
@@ -191,6 +191,3 @@ app.delete("/api/Report/:id", function (req, res) {
   });
 });
 };
-
-
-console.log("Derek, API Key: ", process.env.EOD_KEY);
