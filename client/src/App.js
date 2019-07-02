@@ -1,11 +1,10 @@
 import React from 'react';
 import NavBar from "./components/Navbar/NavBar";
 import Login from "./Pages/Login";
-import Body from "./components/Body/Body";
-import Form from "./components/Form/Form";
-import "./style.css";
+// import Body from "./components/Body/Body";
+// import Form from "./components/Form/Form";
+// import "./style.css";
 // import { useAuth0 } from "../../react-auth0-wrapper";
-
 
 // import the React Router components, and the Profile page component
 import { BrowserRouter, Route, Switch } from "react-router-dom";
@@ -13,7 +12,7 @@ import Profile from "./components/Profile";
 
 // import the PrivateRoute component
 import PrivateRoute from "./components/PrivateRoute";
-
+import ExternalApi from "./components/ExternalApi";
 
 // import logo from './logo.svg';
 // import './App.css';
@@ -53,7 +52,9 @@ function App() {
         </header>
         <Switch>
           <Route path="/" component={Login} />
-          <PrivateRoute path="/profile" component={Profile} />
+          <PrivateRoute exact path="/profile" component={Profile} />
+          {/* NEW - add a route to the ExternalApi component */}
+          <PrivateRoute exact path="/external-api" component={ExternalApi} />
         </Switch>
       </BrowserRouter>
     </div >

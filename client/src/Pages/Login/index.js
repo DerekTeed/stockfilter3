@@ -1,14 +1,14 @@
-import Jumbotron from "../../components/Jumbotron/Jumbotron.js";
 import React from "react";
+import Jumbotron from "../../components/Jumbotron/Jumbotron.js";
 import { useAuth0 } from "../../react-auth0-wrapper";
-import Form from "../../components/Form/Form.js"
+import Top30 from "../../components/Top30/Top30";
 
 const Login = () => {
-    const { isAuthenticated, loginWithRedirect } = useAuth0();
+    const { isAuthenticated } = useAuth0();
     return (
         <div>
         {isAuthenticated ?
-            <Form /> :
+            <Top30 /> :
             <Jumbotron />
         }
         </div>
