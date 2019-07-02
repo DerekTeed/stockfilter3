@@ -1,8 +1,8 @@
 module.exports = function(sequelize, DataTypes) {
   
-    var Stocks = sequelize.define("Stocks", {
+    var Report = sequelize.define("Report", {
       symbol: DataTypes.STRING,
-      StocksDate: DataTypes.DATEONLY,
+      //StocksDate: DataTypes.DATEONLY,
       name: DataTypes.STRING,
       outstandingShares: DataTypes.DECIMAL(18,2),
       ebit: DataTypes.DECIMAL(18,2),
@@ -10,7 +10,7 @@ module.exports = function(sequelize, DataTypes) {
       cash: DataTypes.DECIMAL(18,2),
       stockPrice: DataTypes.DECIMAL(18,2)
     });
-    return Stocks;
+    return Report;
   };
   
   // var Stocks = sequelize.define("Stocks", {
