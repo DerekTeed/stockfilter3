@@ -131,6 +131,8 @@ app.use(cors());
 // log HTTP requests
 app.use(morgan('combined'));
 
+app.set('view engine', 'jade');
+
 // Routes
 // =============================================================
 require("./routes/api-routes.js")(app);
