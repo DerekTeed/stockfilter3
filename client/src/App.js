@@ -3,6 +3,7 @@ import NavBar from "./components/Navbar/NavBar";
 import Login from "./Pages/Login";
 import Body from "./components/Body/Body";
 import Form from "./components/Form/Form";
+import Top30 from "./components/Top30/Top30"; 
 import "./style.css";
 // import { useAuth0 } from "../../react-auth0-wrapper";
 
