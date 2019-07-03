@@ -1,82 +1,112 @@
-import React from "react";
-import "./style.css";
+import React, { Component } from "react";
 
-export function Top30() {
+class Top30 extends Component {
+    // Setting the component's initial state
+    state = {
+        stockName: "",
+        stockAmount: "",
+        stockPrice: ""
+    };
+
+    handleInputChange = event => {
+        // Getting the value and name of the input which triggered the change
+        let value = event.target.value;
+        const name = event.target.name;
+
+        // Updating the input's state
+        this.setState({
+            [name]: value
+        });
+    };
+
+    handleFormSubmit = event => {
+        // Preventing the default behavior of the form submit (which is to refresh the page)
+        event.preventDefault();
+        if (!this.state.stockName || !this.state.stockAmount || !this.state.stockPrice) {
+            alert("Fill out all the info!");
+        }
+        console.log(this.state);
+        this.setState({
+            stockName: "",
+            stockAmount: "",
+            stockPrice: ""
+        });
+    };
+
+//     render() {
+//         // Notice how each input has a `value`, `name`, and `onChange` prop
+//         return (
+//             <div>
+//                 <form className="form">
+//                     <input
+//                         value={this.state.stockName}
+//                         name="stockName"
+//                         onChange={this.handleInputChange}
+//                         type="text"
+//                         placeholder="Company Name"
+//                     />
+//                     <input
+//                         value={this.state.stockAmount}
+//                         name="stockAmount"
+//                         onChange={this.handleInputChange}
+//                         type="text"
+//                         placeholder="Stock Amount"
+//                     />
+//                     <input
+//                         value={this.state.stockPrice}
+//                         name="stockPrice"
+//                         onChange={this.handleInputChange}
+//                         type="text"
+//                         placeholder="Stock Price"
+//                     />
+//                     <button onClick={this.handleFormSubmit}>Submit</button>
+//                 </form>
+//             </div>
+//         );
+//     }
+// }
+
+    render() {
     return (
-        <div className="card" style={{ width: "40rem" }}>
-            <div className="card-header">
-                <h3>Top 30</h3>
+        <div className="container">
+            <div className="card" style={{ width: "18rem"}}>
+                <div className="card-body">
+                    <h5 className="card-title">Input Stock Info</h5>
+                    <form className="form">
+                        <div className="form-group">
+                        <input
+                            value={this.state.stockName}
+                            name="stockName"
+                            onChange={this.handleInputChange}
+                            type="text"
+                            placeholder="Company Name"
+                        />
+                        </div>
+                        <div className="form-group">
+                        <input
+                            value={this.state.stockAmount}
+                            name="stockAmount"
+                            onChange={this.handleInputChange}
+                            type="text"
+                            placeholder="Stock Amount"
+                        />
+                        </div>
+                        <div className="form-group">
+                        <input
+                            value={this.state.stockPrice}
+                            name="stockPrice"
+                            onChange={this.handleInputChange}
+                            type="text"
+                            placeholder="Stock Price"
+                        />
+                        </div>
+                        <button onClick={this.handleFormSubmit}>Add</button>
+                    </form>
+                </div>
             </div>
-            <table className="table">
-                <thead class="thead-success">
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Stock Name</th>
-                        <th scope="col">Stock Amount</th>
-                        <th scope="col">Add</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Stock 1</td>
-                        <td>
-                        <input type="text" class="form-control" aria-describedby="basic-addon1" style={{ width: "5rem"}}/>
-                        </td>
-                        <td>
-                        <button type="button" class="btn btn-success"
-                        onClick={() => console.log("This should add stock to portfolio")}>
-                            Add Stock</button>
-                        </td>
-                    </tr>
-
-                </tbody>
-            </table>
-
-
-            {/* <ul className="list-group list-group-flush">
-                <li className="list-group-item">Stock 1
-                <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon1">Enter Quantity</span>
-                        </div>
-                        <input type="text" class="form-control" aria-describedby="basic-addon1" />
-                        <button type="button" class="btn btn-success">Add Stock</button>
-                    </div>
-                </li>
-                <li className="list-group-item">Stock 2
-                <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon1">Enter Quantity</span>
-                        </div>
-                        <input type="text" class="form-control" aria-describedby="basic-addon1" />
-                        <button type="button" class="btn btn-success">Add Stock</button>
-                    </div>
-                </li>
-                <li className="list-group-item">Stock 3
-                <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon1">Enter Quantity</span>
-                        </div>
-                        <input type="text" class="form-control" aria-describedby="basic-addon1" />
-                        <button type="button" class="btn btn-success">Add Stock</button>
-                    </div>
-                </li>
-            </ul> */}
         </div>
     );
 }
+}
 
-export default Top30;
-
-// export function List({children}) {
-//     return (
-//         <div className="list-overflow-container">
-//           <ul className="list-group">{children}</ul>
-//         </div>
-//       );
-//     }
-
-//     export function ListItem({ children }) {
-//       return <li className="list-group-item">{children}</li>;
-//     }
+export default Top30; 
