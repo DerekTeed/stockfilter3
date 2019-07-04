@@ -150,17 +150,17 @@ module.exports = function (app) {
 
   // Create a new example
   app.get("/api/report/allstocks", async function (req, res) {
-    
+
     //getAllStockData()
     getAllStockData()
 
     res.json("Your Terminal is lighting up with stock API data pulls")
 
- 
+
     db.Report.create(
       {
         symbol: nameResponse.data,
-       // StocksDate: apiData.Financials.Balance_Sheet.quarterly[quarter1End].date,
+        // StocksDate: apiData.Financials.Balance_Sheet.quarterly[quarter1End].date,
         name: apiData.General.Name,
         cash: cashValue,
         longTermDebt: debtLTD,
@@ -172,22 +172,22 @@ module.exports = function (app) {
     //})
     //} //end of getStockAndCreateRecord
   })
-    // eodApi.getFundamentals(req.params.company).then(function (apiData) {
-    //   for (var i = 0; i < dateEndOf4Qtrs.length; i++) {
-    //     getStockAndCreateRecord(apiData, dateEndOf4Qtrs[i], lastDayofMarket)
+  // eodApi.getFundamentals(req.params.company).then(function (apiData) {
+  //   for (var i = 0; i < dateEndOf4Qtrs.length; i++) {
+  //     getStockAndCreateRecord(apiData, dateEndOf4Qtrs[i], lastDayofMarket)
 
-    //   }
-    // }) //end 
+  //   }
+  // }) //end 
 
-    //end await here or end of loop
-  
-  
+  //end await here or end of loop
 
-//random
-// Delete an example by id
-app.delete("/api/Report/:id", function (req, res) {
-  db.Report.destroy({ where: { id: req.params.id } }).then(function (dbData) {
-    res.json(dbData);
+
+
+  //random
+  // Delete an example by id
+  app.delete("/api/Report/:id", function (req, res) {
+    db.Report.destroy({ where: { id: req.params.id } }).then(function (dbData) {
+      res.json(dbData);
+    });
   });
-});
 };
