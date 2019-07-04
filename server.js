@@ -12,6 +12,8 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
+var pug = require('pug');
+
 // const http = require('http');
 
 const app = express();
@@ -131,7 +133,7 @@ app.use(cors());
 // log HTTP requests
 app.use(morgan('combined'));
 
-app.set('view engine', 'jade');
+app.set('view engine', 'pug');
 
 // Routes
 // =============================================================
