@@ -4,17 +4,21 @@
 // ******************************************************************************
 // *** Dependencies
 // =============================================================
-var express = require("express");
-var session = require("express-session");
+const express = require("express");
+const jwt = require("express-jwt");
+const jwksRsa = require("jwks-rsa");
+const session = require("express-session");
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
-const http = require('http');
+var pug = require('pug');
 
-var app = express();
+// const http = require('http');
 
-var PORT = process.env.PORT || 3001;
+const app = express();
+
+const PORT = process.env.PORT || 3001;
 
 // config express-session
 var sess = {
@@ -24,11 +28,6 @@ var sess = {
   saveUninitialized: true
 };
 
-// development only
-// if ('development' === app.get('env')) {
-//   app.use(express.errorHandler());
-// };
-
 if (app.get("env") === "production") {
   sess.cookie.secure = true; // serve secure cookies, requires https
 };
@@ -36,15 +35,15 @@ if (app.get("env") === "production") {
 app.use(session(sess));
 
 // Load environment variables from .env
-var dotenv = require('dotenv');
+const dotenv = require('dotenv');
 dotenv.config();
 
 // Load Passport
-var passport = require('passport');
-var Auth0Strategy = require('passport-auth0');
+const passport = require('passport');
+const Auth0Strategy = require('passport-auth0');
 
 // Configure Passport to use Auth0
-var strategy = new Auth0Strategy(
+const strategy = new Auth0Strategy(
   {
     domain: process.env.AUTH0_DOMAIN,
     clientID: process.env.AUTH0_CLIENT_ID,
@@ -74,23 +73,46 @@ passport.deserializeUser(function (user, done) {
   done(null, user);
 });
 
-var userInViews = require('./lib/middleware/userInViews');
-var authRouter = require('./routes/auth');
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+// Set up Auth0 configuration
+const authConfig = {
+  domain: "dev-gs2kz-d1.auth0.com",
+  audience: "https://stockfilterapi/"
+};
+
+// Define middleware that validates incoming bearer tokens
+// using JWKS from dev-gs2kz-d1.auth0.com
+const checkJwt = jwt({
+  secret: jwksRsa.expressJwtSecret({
+    cache: true,
+    rateLimit: true,
+    jwksRequestsPerMinute: 5,
+    jwksUri: `https://${authConfig.domain}/.well-known/jwks.json`
+  }),
+
+  audience: authConfig.audience,
+  issuer: `https://${authConfig.domain}/`,
+  algorithm: ["RS256"]
+});
+
+// Define an endpoint that must be called with an access token
+app.get("/api/external", checkJwt, (req, res) => {
+  res.send({
+    msg: "Your Access Token was successfully validated!"
+  });
+});
+
+const userInViews = require('./lib/middleware/userInViews');
+const authRouter = require('./routes/auth');
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
 
 app.use(userInViews());
 app.use('/', authRouter);
 app.use('/', indexRouter);
 app.use('/', usersRouter);
 
-// Sets up the Express App
-// =============================================================
-
-
-
 // Requiring our models for syncing
-var db = require("./models");
+const db = require("./models");
 
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
@@ -111,12 +133,12 @@ app.use(cors());
 // log HTTP requests
 app.use(morgan('combined'));
 
+app.set('view engine', 'pug');
+
 // Routes
 // =============================================================
 require("./routes/api-routes.js")(app);
 require("./config/config.json");
-
-//require("./routes/html-routes.js")(app);
 
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
@@ -125,8 +147,3 @@ db.sequelize.sync({ force: false }).then(function () {
     console.log("App listening on PORT " + PORT);
   });
 });
-// db.sequelize.sync().then(function() {
-//   http.createServer(app).listen(app.get('port'), function(){
-//     console.log('Express server listening on port ' + app.get('port'));
-//   });
-// });

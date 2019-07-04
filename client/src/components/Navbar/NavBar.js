@@ -7,25 +7,33 @@ const NavBar = () => {
     const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
 
     return (
-        <nav class="navbar navbar-expand-lg navbar-light bg-dark">
-            <div>
+        <nav className="navbar navbar-expand-lg navbar-light bg-dark">
+
                 {!isAuthenticated && (
-                    <button type="button" class="btn btn-success"
+                    <button type="button" className="btn btn-success"
                         onClick={() =>
                             loginWithRedirect({
                                 redirect_uri: window.location.origin
                             })
-                        }
-                    >
-                        <a class="navbar-brand">Sign Up/Login</a>
+                        }>
+                        <a className="navbar-brand">Login</a>
                     </button>
                 )}
 
-                {isAuthenticated && <button type="button" class="btn btn-success"
-                onClick={() => logout()}>
-                <a class="navbar-brand">Log Out</a>
-                </button>}
-            </div>
+                {isAuthenticated && (
+                    <button type="button" className="btn btn-success"
+                        onClick={() => logout()}>
+                        <a className="navbar-brand">Log Out</a>
+
+                    </button>)
+
+                }
+                <span>
+                    <Link to="/">Home</Link>
+                    <Link to="/profile">Profile</Link>
+                    <Link to="/external-api">External API</Link>
+                </span>
+
         </nav>
     );
 };
