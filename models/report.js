@@ -1,3 +1,4 @@
+
 module.exports = function(sequelize, DataTypes) {
   
     var Report = sequelize.define("Report", {
@@ -14,6 +15,7 @@ module.exports = function(sequelize, DataTypes) {
     return Report;
   };
   
+
   // var Stocks = sequelize.define("Stocks", {
   //     title: {
   //       type: DataTypes.STRING,
@@ -36,4 +38,3 @@ module.exports = function(sequelize, DataTypes) {
   //   });
   //   return Stocks;
   // };
-  

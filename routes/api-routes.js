@@ -3,6 +3,8 @@ var db = require("../models");
 //const eodApi = require('eodhistoricaldata-api');
 const stocks = require("./stockArray");
 const axios = require("axios");
+const router = require("express").Router();
+
 
 
 module.exports = function (app) {
@@ -185,16 +187,19 @@ module.exports = function (app) {
             });
         });
     }
+
   }
-  //end of loop
+}
+//end of loop
 
-  // Create a new example
-  app.get("/api/report/allstocks", async function (req, res) {
+// Create a new example
+router.get("/api/report/allstocks", async function (req, res) {
 
-    //getAllStockData()
-    getAllStockData()
+  //getAllStockData()
+  getAllStockData()
 
-    res.json("Your Terminal is lighting up with stock API data pulls")
+  res.json("Your Terminal is lighting up with stock API data pulls")
+
 
 
     // db.Report.create(
@@ -216,20 +221,21 @@ module.exports = function (app) {
   //   for (var i = 0; i < dateEndOf4Qtrs.length; i++) {
   //     getStockAndCreateRecord(apiData, dateEndOf4Qtrs[i], lastDayofMarket)
 
-  //   }
-  // }) //end 
 
-  //end await here or end of loop
+//   }
+// }) //end 
+
+//end await here or end of loop
 
 
 
-  //random
-  // Delete an example by id
-  app.delete("/api/Report/:id", function (req, res) {
-    db.Report.destroy({ where: { id: req.params.id } }).then(function (dbData) {
-      res.json(dbData);
-    });
+//random
+// Delete an example by id
+router.delete("/api/Report/:id", function (req, res) {
+  db.Report.destroy({ where: { id: req.params.id } }).then(function (dbData) {
+    res.json(dbData);
   });
+
 
   app.get("/api/top30", function (req, res) {
     db.Report.findAll({
@@ -273,4 +279,10 @@ module.exports = function (app) {
   });
 };
 
+
+
+});
+// };
+
+module.exports = router;
 
