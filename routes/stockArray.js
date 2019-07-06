@@ -30,7 +30,8 @@ var stocks = [
 'ADBE',
 'ADI',
 'ADM',
-'ADMP'
+'ADMP',
+'TGP'
 ]
 
 module.exports = stocks;
