@@ -12,7 +12,8 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
-var pug = require('pug');
+const apiRoutes = require("./routes/api-routes");
+// const pug = require('pug');
 
 // const http = require('http');
 
@@ -96,20 +97,23 @@ const checkJwt = jwt({
 
 // Define an endpoint that must be called with an access token
 app.get("/api/external", checkJwt, (req, res) => {
-  res.send({
+  res.json({
     msg: "Your Access Token was successfully validated!"
   });
 });
 
-const userInViews = require('./lib/middleware/userInViews');
+app.set('view engine', 'pug');
+
+// const userInViews = require('./lib/middleware/userInViews');
 const authRouter = require('./routes/auth');
-const indexRouter = require('./routes/index');
+// const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 
-app.use(userInViews());
+// app.use(userInViews());
 app.use('/', authRouter);
-app.use('/', indexRouter);
+// app.use('/', indexRouter);
 app.use('/', usersRouter);
+app.use(apiRoutes);
 
 // Requiring our models for syncing
 const db = require("./models");
@@ -133,11 +137,9 @@ app.use(cors());
 // log HTTP requests
 app.use(morgan('combined'));
 
-app.set('view engine', 'pug');
-
 // Routes
 // =============================================================
-require("./routes/api-routes.js")(app);
+// require("./routes/api-routes.js")(app);
 require("./config/config.json");
 
 // Syncing our sequelize models and then starting our Express app
