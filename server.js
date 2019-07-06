@@ -102,7 +102,7 @@ app.get("/api/external", checkJwt, (req, res) => {
   });
 });
 
-app.set('view engine', 'pug');
+// app.set('view engine', 'pug');
 
 // const userInViews = require('./lib/middleware/userInViews');
 const authRouter = require('./routes/auth');
@@ -145,7 +145,10 @@ require("./config/config.json");
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
 db.sequelize.sync({ force: false }).then(function () {
-  http.createServer(app).listen(PORT, function () {
-    console.log("App listening on PORT " + PORT);
-  });
+  // http.createServer(app).listen(PORT, function () {
+  //   console.log("App listening on PORT " + PORT);
+  // });
+  app.listen(PORT, () =>
+  console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`)
+);
 });
