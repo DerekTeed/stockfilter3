@@ -1,18 +1,21 @@
+
 module.exports = function(sequelize, DataTypes) {
   
-    var Stocks = sequelize.define("Stocks", {
+    var Report = sequelize.define("Report", {
       symbol: DataTypes.STRING,
-      StocksDate: DataTypes.DATEONLY,
-      name: DataTypes.STRING,
-      outstandingShares: DataTypes.DECIMAL(18,2),
-      ebit: DataTypes.DECIMAL(18,2),
-      longTermDebt: DataTypes.DECIMAL(18,2),
-      cash: DataTypes.DECIMAL(18,2),
-      stockPrice: DataTypes.DECIMAL(18,2)
+      //StocksDate: DataTypes.DATEONLY,
+      companyName: DataTypes.STRING,
+      //MarketCapitalization: DataTypes.DECIMAL(18,2),
+      //ebit: DataTypes.DECIMAL(18,2),
+      //longTermDebt: DataTypes.DECIMAL(18,2),
+      //cash: DataTypes.DECIMAL(18,2),
+      stockPrice: DataTypes.DECIMAL(18,2),
+      finalRatioEvEbit: DataTypes.DECIMAL(18,2)
     });
-    return Stocks;
+    return Report;
   };
   
+
   // var Stocks = sequelize.define("Stocks", {
   //     title: {
   //       type: DataTypes.STRING,
@@ -35,4 +38,3 @@ module.exports = function(sequelize, DataTypes) {
   //   });
   //   return Stocks;
   // };
-  

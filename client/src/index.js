@@ -34,6 +34,7 @@ ReactDOM.render(
     <Auth0Provider
         domain={config.domain}
         client_id={config.clientId}
+        audience={config.audience}     // NEW - specify the audience value
         onRedirectCallback={onRedirectCallback}
     >
         <App />

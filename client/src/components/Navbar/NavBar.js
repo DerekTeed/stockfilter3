@@ -8,22 +8,32 @@ const NavBar = () => {
     const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
 
     return (
-        <nav class="navbar navbar-expand-lg navbar-light bg-dark">
-            <div>
-                {!isAuthenticated && (
-                    <button type="button" class="btn btn-success"
-                        onClick={() =>
-                            loginWithRedirect({
-                                redirect_uri: window.location.origin
-                            })
-                        }
-                    >
-                        <a class="navbar-brand">Sign Up/Login</a>
-                    </button>
-                )}
+        <nav className="navbar navbar-expand-lg navbar-light bg-dark">
 
-                {isAuthenticated && <button type="button" class="btn btn-success"
+            {!isAuthenticated && (
+                <button type="button mr-auto" className="btn btn-success"
+                    onClick={() =>
+                        loginWithRedirect({
+                            redirect_uri: window.location.origin
+                        })
+                    }>
+                    <a className="navbar-brand">Login</a>
+                </button>
+            )}
+
+            {isAuthenticated && <button type="button" className="btn btn-success"
+                onClick={() => console.log("This should load top 30")}>
+                <a className="navbar-brand">Top 30</a>
+            </button>}
+
+            {isAuthenticated && <button type="button" className="btn btn-success"
+                onClick={() => console.log("This should load portfolios")}>
+                <a className="navbar-brand">Portfolios</a>
+            </button>}
+
+            {isAuthenticated && <button type="button" className="btn btn-success"
                 onClick={() => logout()}>
+<<<<<<< HEAD
                 <a class="navbar-brand">Log Out</a>
                 </button>}
 
@@ -46,6 +56,16 @@ const NavBar = () => {
       </span>
     )}
             </div>
+=======
+                <a className="navbar-brand">Log Out</a>
+            </button>}
+            <span>
+                <Link to="/">Home</Link>
+                <Link to="/profile">Profile</Link>
+                <Link to="/external-api">External API</Link>
+            </span>
+  
+>>>>>>> 14ba2ac91a06a024dd132ca58136735e053bddb2
         </nav>
     );
 };
