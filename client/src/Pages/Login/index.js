@@ -1,30 +1,51 @@
-import React from "react";
+import React, { Component } from "react";
 import Jumbotron from "../../components/Jumbotron/Jumbotron.js";
 import { useAuth0 } from "../../react-auth0-wrapper";
-<<<<<<< HEAD
-import Form from "../../components/Form/Form.js"
-import Top30 from "../../components/Top30/Top30.js"
-=======
 import Top30 from "../../components/Top30/Top30";
->>>>>>> fe5259b87dacdbd6d2379c82b08cea53e20cfd84
+import { Auth0Provider } from "../../react-auth0-wrapper";
+import api from "../../api.js";
 
-const Login = () => {
-    const { isAuthenticated } = useAuth0();
-    return (
-        <div>
-<<<<<<< HEAD
-            {isAuthenticated ?
-                <Top30 /> :
-                <Jumbotron />
-            }
-=======
-        {isAuthenticated ?
-            <Top30 /> :
-            <Jumbotron />
-        }
->>>>>>> fe5259b87dacdbd6d2379c82b08cea53e20cfd84
-        </div>
-    );
-}
+class Login extends Component {
+    state = {
+
+    };
+
+    componentWillMount() {
+        // api.getTop30()
+        //     .then(res => this.setState({top30: res}))
+        //     .then(console.log(this.state.top30)) 
+        this.setState({ top30: api.getTop30() });
+    }
+
+    render() {
+
+        return (
+            <div>
+                {/* {Auth0Provider.isAuthenticated ?
+                    <Top30 
+                    top30 = {this.state.top30}
+                    /> :
+                    <Jumbotron />
+                } */}
+                <Top30
+                    top30={this.state.top30}
+                /> :
+            </div>
+        );
+    };
+};
+
+
+// const Login = () => {
+//     const { isAuthenticated } = useAuth0();
+//     return (
+//         <div>
+//         {isAuthenticated ?
+//             <Top30 /> :
+//             <Jumbotron />
+//         }
+//         </div>
+//     );
+// }
 
 export default Login;

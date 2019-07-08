@@ -40,7 +40,7 @@ const NavBar = () => {
                 <Link to="/profile">Profile</Link>
                 <Link to="/external-api">External API</Link>
             </span>
-
+  
         </nav>
     );
 };
