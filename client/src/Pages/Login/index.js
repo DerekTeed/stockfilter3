@@ -1,13 +1,14 @@
 import React, { Component } from "react";
-import Jumbotron from "../../components/Jumbotron/Jumbotron.js";
-import { useAuth0 } from "../../react-auth0-wrapper";
+// import Jumbotron from "../../components/Jumbotron/Jumbotron.js";
+// import { useAuth0 } from "../../react-auth0-wrapper";
 import Top30 from "../../components/Top30/Top30";
-import { Auth0Provider } from "../../react-auth0-wrapper";
+// import { Auth0Provider } from "../../react-auth0-wrapper";
 import api from "../../api.js";
 
 class Login extends Component {
     state = {
-
+        name: "",
+        price: ""
     };
 
     componentWillMount() {
@@ -29,7 +30,8 @@ class Login extends Component {
                 } */}
                 <Top30
                     top30={this.state.top30}
-                /> :
+                /> 
+                {/* <Jumbotron /> */}
             </div>
         );
     };

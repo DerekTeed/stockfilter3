@@ -1,14 +1,14 @@
-import React, { Component } from "react";
+import React from "react";
 
 
 
 function Top30(props) {
     return (
-        <div class="card" style={{width: "18rem"}}>
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <table class="table">
-                    <thead class="thead-dark">
+        <div className="card" style={{width: "18rem"}}>
+            <div className="card-body">
+                <h5 className="card-title">Card title</h5>
+                <table className="table" style={{width: "18rem"}}>
+                    <thead className="thead-dark">
                         <tr>
                             <th scope="col">Stock Name</th>
                             <th scope="col">Stock Price</th>
@@ -32,10 +32,10 @@ function Top30(props) {
                                     {stock.price}
                                 </td>
                                 <td>
-                                    <div class="input-group mb-3">
+                                    <div className="input-group mb-3">
                                         <input name={stock.name} type="text" placeholder="Enter Shares" aria-label="Enter Shares" aria-describedby="basic-addon1" />
                                     </div>
-                                    <button type="button" class="btn btn-success">Add</button>
+                                    <button type="button" className="btn btn-success">Add</button>
                                 </td>
                             </tr>
                         ))}
