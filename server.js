@@ -111,7 +111,7 @@ const authRouter = require('./routes/auth');
 const usersRouter = require('./routes/users');
 
 app.get('/', function(req, res) {
-  res.send(path.resolve(__dirname, 'client/build', 'index.html'))
+  res.sendFile(path.resolve(__dirname, 'client/build', 'index.html'))
 }
 )
 // app.use(userInViews());
