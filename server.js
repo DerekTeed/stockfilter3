@@ -110,10 +110,7 @@ const authRouter = require('./routes/auth');
 // const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 
-app.get('/', function(req, res) {
-  res.sendFile(path.resolve(__dirname, 'client/build', 'index.html'))
-}
-)
+
 // app.use(userInViews());
 app.use('/', authRouter);
 // app.use('/', indexRouter);
@@ -123,13 +120,17 @@ app.use(apiRoutes);
 // Requiring our models for syncing
 const db = require("./models");
 
+app.get('/', function(req, res) {
+  res.sendFile(path.resolve(__dirname, 'client/build', 'index.html'))
+}
+)
+
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Static directory
-app.use(express.static("./client/public/index.html"));
-
+app.use(express.static(path.resolve(__dirname, 'client/build')));
 // enhance your app security with Helmet
 app.use(helmet());
 
