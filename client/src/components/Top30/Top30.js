@@ -10,8 +10,8 @@ function Top30(props) {
                 <table class="table">
                     <thead class="thead-dark">
                         <tr>
-                            <th scope="col">#</th>
                             <th scope="col">Stock Name</th>
+                            <th scope="col">Stock Price</th>
                             <th scope="col">Amount</th>
                             <th scope="col">Add</th>
                         </tr>
