@@ -30,18 +30,18 @@ async function getAllStockData() {
               .then(async function (EbitResponse) {
                 await axios.get(URLDebt)
                   .then(async function (debtData) {
-                    await axios.get(URLMarketCapitalization)
+                     await axios.get(URLMarketCapitalization)
                       .then(async function (MarketCapitalizationResponse) {
-                        axios.get(URLStockPrice)
-                          .then(function (stockPriceData) {
+                         await axios.get(URLStockPrice)
+                           .then(function (stockPriceData) {
                             // await axios.get(URLPreferredShares)
                             //   .then(function (preferredData) {
                             //-----------Name of Company-------------------------//
                             //console.log("Derek, here is the API Res");
                             // console.log("Name of Company: " + nameResponse.data);
-                            var companyName = nameResponse.data
-                            var stockDataPackageQ12019 = [];
-                            var stockDataFinal = [];
+                            var companyName = nameResponse.data;
+                            // var stockDataPackageQ12019 = [];
+                            // var stockDataFinal = [];
                             //--------------Cash-------------------------------//
                             const cashData = [];
                             for (const key in cashResponse.data) {
@@ -116,67 +116,46 @@ async function getAllStockData() {
                             // }
                             //const MarketCapitalization = MarketCapitalizationData.slice(0, 1);
                             var MarketCapitalization = MarketCapitalizationResponse.data;
-                            // console.log("MarketCapitalization: " + MarketCapitalization)
-                            //console.log("MarketCapitalization: " + MarketCapitalization)
-
-
-
-                            //---------------Stock Price----------------------------------//
-                            //console.log("Stock Price: " + stockPriceData.data);
-                            //   stockDataPackageQ12019.push(
-                            //   {"companyName": nameResponse.data,
-                            //   "cash": cashValue,
-                            //   "longTermDebt": debtLTD1,
-                            //   "ebit": annualEbit,                      
-                            //   "marketCapitalization": MarketCapitalization,
-                            //   "stockPrice": stockPriceData.data},
-                            // )
-                            var stockPrice = stockPriceData.data;
-
-                            stockDataPackageQ12019.push(
-                              {
-                                companyName,
-                                cashValue,
-                                debtLTD,
-                                annualEbit,
-                                MarketCapitalization,
-                                stockPrice
-                              },
-                            )
-                            //console.log(companyName)
+                            
+                         
+                           
                             console.log("----Stock data baybeee!-----")
                             //console.log("----Array Len:"+stockDataPackageQ12019.length+"-----")
                             //console.log(stockDataPackageQ12019[0].cashValue)
 
-                            stockDataFinal.push(
-                              stockDataPackageQ12019[0].companyName,
-                              stockDataPackageQ12019[0].cashValue,
-                              stockDataPackageQ12019[0].debtLTD,
-                              stockDataPackageQ12019[0].annualEbit,
-                              stockDataPackageQ12019[0].MarketCapitalization,
-                              stockDataPackageQ12019[0].stockPrice,
+                            // stockDataFinal.push(
+                            //   stockDataPackageQ12019[0].companyName,
+                            //   stockDataPackageQ12019[0].cashValue,
+                            //   stockDataPackageQ12019[0].debtLTD,
+                            //   stockDataPackageQ12019[0].annualEbit,
+                            //   stockDataPackageQ12019[0].MarketCapitalization,
+                            //   stockDataPackageQ12019[0].stockPrice,
 
-                            )
+                            // )
 
 
-                            console.log(companyName)
-                            console.log("EV/EBIT: ", finalRatioEvEbit);
+                            console.log(companyName);
+                            //console.log(typeof(companyName));
+                            
 
-                            var enterpriseValue = [+stockDataFinal[2] + +stockDataFinal[4]]
+                            var enterpriseValue = [(+debtLTD + +MarketCapitalization)+ +cashValue];
                             var symbol = stocks[i];
-                            var finalRatioEvEbit = parseFloat((enterpriseValue / stockDataFinal[3])).toFixed(2);
+                            var finalRatioEvEbit = parseFloat((enterpriseValue / annualEbit)).toFixed(2);
+                            console.log("EV/EBIT: ", finalRatioEvEbit);
+                            console.log(annualEbit);
                             db.Report.create({
                               companyName: companyName,
                               symbol: symbol,
-                              stockPrice: stockPrice,
+                             // stockPrice: stockPrice,
                               finalRatioEvEbit: finalRatioEvEbit
 
-                            }).then(function (dbData) {
-                              //console.log(dbData);
-                              console.log("Hi World")
-                            });
+                            })
+                            // .then(function (dbData) {
+                            //   //console.log(dbData);
+                            //  console.log("Hi World")
+                            // });
 
-                          });
+                           });
                       });
                   });
               });
@@ -195,79 +174,45 @@ router.get("/api/report/allstocks", async function (req, res) {
 
   res.json("Your Terminal is lighting up with stock API data pulls")
 
-  // db.Report.create(
-  //   {
-  //     symbol: nameResponse.data,
-  //     // StocksDate: apiData.Financials.Balance_Sheet.quarterly[quarter1End].date,
-  //     name: apiData.General.Name,
-  //     cash: cashValue,
-  //     longTermDebt: debtLTD,
-  //     ebit: annualEbit,
-  //     MarketCapitalization: MarketCapitalization,
-  //     stockPrice: stockPriceData.data
-  //   }
-  // )
-  //})
-  //} //end of getStockAndCreateRecord
+ 
 });
-// eodApi.getFundamentals(req.params.company).then(function (apiData) {
-//   for (var i = 0; i < dateEndOf4Qtrs.length; i++) {
-//     getStockAndCreateRecord(apiData, dateEndOf4Qtrs[i], lastDayofMarket)
 
-
-//   }
-// }) //end 
-
-//end await here or end of loop
-
-//random
-// Delete an example by id
 router.delete("/api/Report/:id", function (req, res) {
   db.Report.destroy({ where: { id: req.params.id } }).then(function (dbData) {
     res.json(dbData);
   });
 });
 
-router.get("/api/top30", function (req, res) {
+//Takes stocks from MySQL table after I run getAllStockData()
+router.get("/api/top10", function (req, res) {
   db.Report.findAll({
-    //  where: {
-
-    //    finalRatioEvEbit: {
-    //    $gte: 0
-    //   } 
-    // },
+    
     order: [
       ["finalRatioEvEbit", "asc"]
     ],
-    limit: 30
+    limit: 10
   }).then(function (dbData) {
     var stockArray = [];
     dbData.forEach(element => {
       //console.log(parseFloat(element.finalRatioEvEbit));
       var x = parseFloat(element.finalRatioEvEbit);
       console.log("x", typeof x)
+      console.log(x)
       if (x > 0) {
         stockArray.push(element)
       }
+      console.log(x)
       console.log(typeof (element.finalRatioEvEbit));
+      console.log(element.finalRatioEvEbit);
+      console.log("stockArray: ", stockArray);
+      
     });
     //dbData.filter(e => e.finalRatioEvEbit > 0)
     res.json(stockArray);
   });
 });
 
-router.get("/api/report/company", function (req, res) {
-  db.Report.findAll({
-    where: {
-      finalRatioEvEbit: req.params.company
-    },
-    order: [
-      ["finalRatioEvEbit", "desc"]
-    ]
-  }).then(function (dbData) {
-    res.json(dbData);
-  });
-});
+
 
 module.exports = router;
 
