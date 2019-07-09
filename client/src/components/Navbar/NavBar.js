@@ -34,24 +34,24 @@ const NavBar = () => {
             {isAuthenticated && <button type="button" className="btn btn-success"
                 onClick={() => logout()}>
 
-                <a class="navbar-brand">Log Out</a>
+                <a className="navbar-brand">Log Out</a>
             </button>}
 
-            {isAuthenticated && <button type="button" class="btn btn-success"
+            {isAuthenticated && <button type="button" className="btn btn-success"
                 //Something needs to happen with the onClick below
                 onClick={() => console.log("Hello World")}>
-                <a class="navbar-brand">View Top 30 List</a>
+                <a className="navbar-brand">View Top 30 List</a>
             </button>}
 
-            {isAuthenticated && <button type="button" class="btn btn-success"
+            {isAuthenticated && <button type="button" className="btn btn-success"
                 //Something needs to happen with the onClick below
                 onClick={() => console.log("Hello World")}>
-                <a class="navbar-brand">View Portfolios</a>
+                <a className="navbar-brand">View Portfolios</a>
             </button>}
 
             {isAuthenticated && (
                 <span>
-                    <Link to="/">Home</Link>
+                    <Link to="/home">Home</Link>
                     <Link to="/profile">Profile</Link>
                     <Link to="/external-api">External API</Link>
                 </span>

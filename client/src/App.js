@@ -1,10 +1,10 @@
 import React from 'react';
 import NavBar from "./components/Navbar/NavBar";
 import Jumbotron from "./components/Jumbotron/Jumbotron";
-import Body from "./components/Body/Body";
+// import Body from "./components/Body/Body";
 // import Card30 from "./components/Card30/Card30";
 // import Profs from "./components/Profs/Profs";
-import Input from "./components/Input/Input";
+// import Input from "./components/Input/Input";
 import Login from "./Pages/Login";
 import "./style.css";
 
@@ -54,16 +54,17 @@ function App() {
         </header>
         <Switch>
           {/*route must have 'exact' parameter specified */}
-          <Route path="/" exact component={Login}/>
+          <Route path="/" exact component={Jumbotron} />
+          <PrivateRoute path="/home" component={Login} />
           <PrivateRoute path="/profile" component={Profile} />
           {/* NEW - add a route to the ExternalApi component */}
           <PrivateRoute path="/external-api" component={ExternalApi} />
         </Switch>
       </BrowserRouter>
-              <Jumbotron />
-              <Body />
+              {/* <Jumbotron /> */}
+              {/* <Body /> */}
               {/* <Card30 /> */}
-              <Input />
+              {/* <Input /> */}
     </div >
   );
 }
