@@ -40,6 +40,8 @@ async function getAllStockData() {
                             //console.log("Derek, here is the API Res");
                             // console.log("Name of Company: " + nameResponse.data);
                             var companyName = nameResponse.data;
+                            var stockPrice = stockPriceData.data;
+                            console.log("stocPrice: ", stockPrice);
                             // var stockDataPackageQ12019 = [];
                             // var stockDataFinal = [];
                             //--------------Cash-------------------------------//
@@ -143,10 +145,13 @@ async function getAllStockData() {
                             var finalRatioEvEbit = parseFloat((enterpriseValue / annualEbit)).toFixed(2);
                             console.log("EV/EBIT: ", finalRatioEvEbit);
                             console.log(annualEbit);
+                            
+                            console.log("stockPrice: " , stockPrice);
+        
                             db.Report.create({
                               companyName: companyName,
                               symbol: symbol,
-                             // stockPrice: stockPrice,
+                             stockPrice: stockPrice,
                               finalRatioEvEbit: finalRatioEvEbit
 
                             })

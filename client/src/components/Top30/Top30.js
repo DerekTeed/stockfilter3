@@ -4,16 +4,16 @@ import React from "react";
 
 function Top30(props) {
     return (
-        <div className="card" style={{width: "18rem"}}>
-            <div className="card-body">
+        <div className="card" style={{width: "40rem"}}>
+            <div className="card-body" >
                 <h5 className="card-title">Card title</h5>
-                <table className="table" style={{width: "18rem"}}>
+                <table className="table" >
                     <thead className="thead-dark">
                         <tr>
                             <th scope="col">Stock Name</th>
                             <th scope="col">Stock Price</th>
                             <th scope="col">Amount</th>
-                            <th scope="col">Add</th>
+                            {/* <th scope="col">Add</th> */}
                         </tr>
                     </thead>
                     <tbody>
