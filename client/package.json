@@ -5,6 +5,7 @@
   "dependencies": {
     "eodhistoricaldata-api": "^1.0.8",
     "mysql": "^2.17.1",
+    "mysql2": "^1.6.5",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router": "^5.0.1",

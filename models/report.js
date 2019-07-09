@@ -9,7 +9,7 @@ module.exports = function(sequelize, DataTypes) {
       //ebit: DataTypes.DECIMAL(18,2),
       //longTermDebt: DataTypes.DECIMAL(18,2),
       //cash: DataTypes.DECIMAL(18,2),
-      stockPrice: DataTypes.DECIMAL(18,2),
+      //stockPrice: DataTypes.DECIMAL(18,2),
       finalRatioEvEbit: DataTypes.DECIMAL(18,2)
     });
     return Report;
