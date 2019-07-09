@@ -13,6 +13,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const apiRoutes = require("./routes/api-routes");
+const path = require("path");
 // const pug = require('pug');
 
 // const http = require('http');
@@ -109,6 +110,10 @@ const authRouter = require('./routes/auth');
 // const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 
+app.get('/', function(req, res) {
+  res.send(path.resolve(__dirname, 'client/build', 'index.html'))
+}
+)
 // app.use(userInViews());
 app.use('/', authRouter);
 // app.use('/', indexRouter);
