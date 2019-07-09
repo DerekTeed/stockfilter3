@@ -19,7 +19,7 @@ async function getAllStockData() {
     var URLEbit = "https://eodhistoricaldata.com/api/fundamentals/" + stocks[i] + ".US?api_token=" + process.env.EOD_KEY + "&filter=Financials::Income_Statement::quarterly";
     var URLDebt = "https://eodhistoricaldata.com/api/fundamentals/" + stocks[i] + ".US?api_token=" + process.env.EOD_KEY + "&filter=Financials::Balance_Sheet::quarterly";
     var URLMarketCapitalization = "https://eodhistoricaldata.com/api/fundamentals/" + stocks[i] + ".US?api_token=" + process.env.EOD_KEY + "&filter=Highlights::MarketCapitalization";
-    //var URLStockPrice = "https://eodhistoricaldata.com/api/real-time/" + stocks[i] + ".US?api_token=" + process.env.EOD_KEY + "&fmt=json&filter=close";
+    var URLStockPrice = "https://eodhistoricaldata.com/api/real-time/" + stocks[i] + ".US?api_token=" + process.env.EOD_KEY + "&fmt=json&filter=close";
     //var URLPreferredShares = "https://eodhistoricaldata.com/api/fundamentals/" + stocks[i] + ".US?api_token=" + process.env.EOD_KEY + "&filter=Financials::Balance_Sheet::quarterly";
 
     await axios.get(URLName)
@@ -31,9 +31,9 @@ async function getAllStockData() {
                 await axios.get(URLDebt)
                   .then(async function (debtData) {
                      await axios.get(URLMarketCapitalization)
-                      .then( function (MarketCapitalizationResponse) {
-                        // axios.get(URLStockPrice)
-                        //   .then(function (stockPriceData) {
+                      .then(async function (MarketCapitalizationResponse) {
+                         await axios.get(URLStockPrice)
+                           .then(function (stockPriceData) {
                             // await axios.get(URLPreferredShares)
                             //   .then(function (preferredData) {
                             //-----------Name of Company-------------------------//
@@ -155,7 +155,7 @@ async function getAllStockData() {
                             //  console.log("Hi World")
                             // });
 
-                          // });
+                           });
                       });
                   });
               });
