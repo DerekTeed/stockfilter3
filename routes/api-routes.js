@@ -182,11 +182,11 @@ router.get("/api/report/allstocks", async function (req, res) {
  
 });
 
-router.delete("/api/Report/:id", function (req, res) {
-  db.Report.destroy({ where: { id: req.params.id } }).then(function (dbData) {
-    res.json(dbData);
-  });
-});
+// router.delete("/api/Report/:id", function (req, res) {
+//   db.Report.destroy({ where: { id: req.params.id } }).then(function (dbData) {
+//     res.json(dbData);
+//   });
+// });
 
 //Takes stocks from MySQL table after I run getAllStockData()
 router.get("/api/top10", function (req, res) {
