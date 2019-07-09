@@ -1,10 +1,12 @@
 import React from 'react';
 import NavBar from "./components/Navbar/NavBar";
+import Jumbotron from "./components/Jumbotron/Jumbotron";
+import Body from "./components/Body/Body";
+// import Card30 from "./components/Card30/Card30";
+// import Profs from "./components/Profs/Profs";
+import Input from "./components/Input/Input";
 import Login from "./Pages/Login";
-// import Body from "./components/Body/Body";
-// import Form from "./components/Form/Form";
 import "./style.css";
-// import { useAuth0 } from "../../react-auth0-wrapper";
 
 // import the React Router components, and the Profile page component
 import { BrowserRouter, Route, Switch } from "react-router-dom";
@@ -58,6 +60,10 @@ function App() {
           <PrivateRoute path="/external-api" component={ExternalApi} />
         </Switch>
       </BrowserRouter>
+              <Jumbotron />
+              <Body />
+              {/* <Card30 /> */}
+              <Input />
     </div >
   );
 }
