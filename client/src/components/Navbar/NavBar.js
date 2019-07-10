@@ -21,15 +21,15 @@ const NavBar = () => {
                 </button>
             )}
 
-            {isAuthenticated && <button type="button" className="btn btn-success"
+            {/* {isAuthenticated && <button type="button" className="btn btn-success"
                 onClick={() => console.log("This should load top 30")}>
                 <a className="navbar-brand">Top 30</a>
-            </button>}
+            </button>} */}
 
-            {isAuthenticated && <button type="button" className="btn btn-success"
+            {/* {isAuthenticated && <button type="button" className="btn btn-success"
                 onClick={() => console.log("This should load portfolios")}>
                 <a className="navbar-brand">Portfolios</a>
-            </button>}
+            </button>} */}
 
             {isAuthenticated && <button type="button" className="btn btn-success"
                 onClick={() => logout()}>
@@ -37,17 +37,17 @@ const NavBar = () => {
                 <a className="navbar-brand">Log Out</a>
             </button>}
 
-            {isAuthenticated && <button type="button" className="btn btn-success"
+            {/* {isAuthenticated && <button type="button" className="btn btn-success"
                 //Something needs to happen with the onClick below
                 onClick={() => console.log("Hello World")}>
                 <a className="navbar-brand">View Top 30 List</a>
-            </button>}
+            </button>} */}
 
-            {isAuthenticated && <button type="button" className="btn btn-success"
+            {/* {isAuthenticated && <button type="button" className="btn btn-success"
                 //Something needs to happen with the onClick below
                 onClick={() => console.log("Hello World")}>
                 <a className="navbar-brand">View Portfolios</a>
-            </button>}
+            </button>} */}
 
             {isAuthenticated && (
                 <span>

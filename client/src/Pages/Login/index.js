@@ -3,51 +3,80 @@ import React, { Component } from "react";
 // import { useAuth0 } from "../../react-auth0-wrapper";
 import Top30 from "../../components/Top30/Top30";
 // import { Auth0Provider } from "../../react-auth0-wrapper";
-import api from "../../api.js";
+import API from "../../utils/API";
+// import axios from "axios";
+import { Col, Row, Container } from "../../components/Grid";
 
 class Login extends Component {
+
     state = {
-        name: "",
-        price: ""
+        data: [],
+
     };
 
-    componentWillMount() {
-        // api.getTop30()
-        //     .then(res => this.setState({top30: res}))
-        //     .then(console.log(this.state.top30)) 
-        this.setState({ top30: api.getTop30() });
+    componentDidMount() {
+        this.loadStocks();
     }
+
+    loadStocks = () => {
+        API.getTop10()
+            .then(res => res.data)
+            .then(
+                data => this.setState({
+                    data
+                })
+            )
+            .catch(() =>
+                this.setState({
+                    data: [],
+                    message: "No Stocks Found"
+                })
+            );
+    };
+
+    // componentDidMount() {
+    //     // when component mounted, start a GET request
+    //     // to specified URL
+    //     axios.get("/api/top10")
+    //         .then(response => response.data) 
+    //         .then(data => this.setState({ data }));
+    // }
+
+
+    // render() {
+    //     return (
+    //         <ul>
+    //             {
+    //                 this.state.data.map(function (stock) {
+    //                     return <li key={stock.id}>{stock.id} - {stock.companyName}</li>;
+    //                 })
+    //             }
+    //         </ul>
+    //     );
+    // }
 
     render() {
 
         return (
-            <div>
-                {/* {Auth0Provider.isAuthenticated ?
-                    <Top30 
-                    top30 = {this.state.top30}
-                    /> :
-                    <Jumbotron />
-                } */}
-                <Top30
-                    top30={this.state.top30}
-                /> 
-                {/* <Jumbotron /> */}
-            </div>
+            <Container>
+                <Row>
+                    <Col size="md-6">
+                        {this.state.data.map(stock => (
+                            <Top30
+
+                                name={stock.companyName}
+                                price={stock.stockPrice}
+                                ebit={stock.finalRatioEvEbit}
+                            />
+                        ))};
+
+                    </Col>
+                </Row>
+            </Container>
         );
-    };
-};
 
 
-// const Login = () => {
-//     const { isAuthenticated } = useAuth0();
-//     return (
-//         <div>
-//         {isAuthenticated ?
-//             <Top30 /> :
-//             <Jumbotron />
-//         }
-//         </div>
-//     );
-// }
+    }
+}
 
 export default Login;
