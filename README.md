@@ -1,8 +1,14 @@
+<<<<<<< HEAD
+Project Title: Stock Filter
 
-### Description
+Team Members: Derek Teed, Trevor Haining, Ben Pooladian
 
-	Stock Filter 3 is an app which uses a formula to obtain 10 stocks which we believe are wise long term investments. The goal is to have the user make an investment for one year before selling the purchased stock.
+Target Audience: This app is made for individual investors who want to earn a return that is higher than the market average by following a simple strategy of buying the lowest valued stocks based on EV/EBIT.
 
-	Too many investment sites encourage constant buying and selling of stocks. We wanted to separate the user from the day to day data so they aren’t tempted to sell their investment prematurely. Companies benefit when people buy and sell more because they charge per transaction, our app suggests the opposite.
+Project Description: The application pulls stock data from thousands of stocks from the NYSE and NASDAQ, and returns a list of the cheapest stocks to buy based on Enterprise Value(EV) / Earnings Before Interest & Taxes(EBIT). We place the top 10 stocks on the top10 page(https://stockfilter20191.herokuapp.com/home).
 
-	The result is a simple app which allows the user to track their investments made with our method. It lets them update their portfolios as changes are made and view our recommended list of 10 stocks to make a yearly investment in.
+How to use: The user will go to (https://stockfilter20191.herokuapp.com/). Click on "Login" at the top left. The user can log into their google account or their email and password. Next click on "Top Stocks" on the top left. The page https://stockfilter20191.herokuapp.com/home will open and the user can view the top 10 stocks. Every 3 months we will update with the newest top 10 stocks after each earnings season ends.
+
+The user can reference the home page with the top 10 stocks and buy the stocks. The best strategy is to buy some or all the top 10 stocks and wait 366 days to sell for long term capital gains. The user can rotate into a new top 10 stocks after selling their first top 10 stocks after 366 days.
+
+Too many investment sites encourage constant buying and selling of stocks based on complicated strategies. Our idea is to make it simple and effective.
