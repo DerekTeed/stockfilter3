@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Project Title: Stock Filter
 
 Team Members: Derek Teed, Trevor Haining, Ben Pooladian

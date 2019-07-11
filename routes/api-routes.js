@@ -5,9 +5,6 @@ const stocks = require("./stockArray");
 const axios = require("axios");
 const router = require("express").Router();
 
-
-
-
 // Get all examples
 
 async function getAllStockData() {
@@ -24,16 +21,17 @@ async function getAllStockData() {
 
     await axios.get(URLName)
       .then(async function (nameResponse) {
+        console.log("Name Res: " + nameResponse);
         await axios.get(URLCash)
           .then(async function (cashResponse) {
             await axios.get(URLEbit)
               .then(async function (EbitResponse) {
                 await axios.get(URLDebt)
                   .then(async function (debtData) {
-                     await axios.get(URLMarketCapitalization)
+                    await axios.get(URLMarketCapitalization)
                       .then(async function (MarketCapitalizationResponse) {
-                         await axios.get(URLStockPrice)
-                           .then(function (stockPriceData) {
+                        await axios.get(URLStockPrice)
+                          .then(function (stockPriceData) {
                             // await axios.get(URLPreferredShares)
                             //   .then(function (preferredData) {
                             //-----------Name of Company-------------------------//
@@ -41,7 +39,7 @@ async function getAllStockData() {
                             // console.log("Name of Company: " + nameResponse.data);
                             var companyName = nameResponse.data;
                             var stockPrice = stockPriceData.data;
-                            console.log("stocPrice: ", stockPrice);
+                            // console.log("stocPrice: ", stockPrice);
                             // var stockDataPackageQ12019 = [];
                             // var stockDataFinal = [];
                             //--------------Cash-------------------------------//
@@ -118,9 +116,9 @@ async function getAllStockData() {
                             // }
                             //const MarketCapitalization = MarketCapitalizationData.slice(0, 1);
                             var MarketCapitalization = MarketCapitalizationResponse.data;
-                            
-                         
-                           
+
+
+
                             console.log("----Stock data baybeee!-----")
                             //console.log("----Array Len:"+stockDataPackageQ12019.length+"-----")
                             //console.log(stockDataPackageQ12019[0].cashValue)
@@ -138,20 +136,20 @@ async function getAllStockData() {
 
                             console.log(companyName);
                             //console.log(typeof(companyName));
-                            
 
-                            var enterpriseValue = [(+debtLTD + +MarketCapitalization)+ +cashValue];
+
+                            var enterpriseValue = [(+debtLTD + +MarketCapitalization) + +cashValue];
                             var symbol = stocks[i];
                             var finalRatioEvEbit = parseFloat((enterpriseValue / annualEbit)).toFixed(2);
                             console.log("EV/EBIT: ", finalRatioEvEbit);
                             console.log(annualEbit);
-                            
-                            console.log("stockPrice: " , stockPrice);
-        
+
+                            console.log("stockPrice: ", stockPrice);
+
                             db.Report.create({
                               companyName: companyName,
                               symbol: symbol,
-                             stockPrice: stockPrice,
+                              stockPrice: stockPrice,
                               finalRatioEvEbit: finalRatioEvEbit
 
                             })
@@ -160,7 +158,7 @@ async function getAllStockData() {
                             //  console.log("Hi World")
                             // });
 
-                           });
+                          });
                       });
                   });
               });
@@ -179,7 +177,6 @@ router.get("/api/report/allstocks", async function (req, res) {
 
   res.json("Your Terminal is lighting up with stock API data pulls")
 
- 
 });
 
 // router.delete("/api/Report/:id", function (req, res) {
@@ -191,33 +188,32 @@ router.get("/api/report/allstocks", async function (req, res) {
 //Takes stocks from MySQL table after I run getAllStockData()
 router.get("/api/top10", function (req, res) {
   db.Report.findAll({
-    
+
     order: [
       ["finalRatioEvEbit", "asc"]
     ],
     limit: 10
+
   }).then(function (dbData) {
     var stockArray = [];
     dbData.forEach(element => {
       //console.log(parseFloat(element.finalRatioEvEbit));
       var x = parseFloat(element.finalRatioEvEbit);
-      console.log("x", typeof x)
-      console.log(x)
+      // console.log("x", typeof x)
+      // console.log(x)
       if (x > 0) {
         stockArray.push(element)
       }
-      console.log(x)
-      console.log(typeof (element.finalRatioEvEbit));
-      console.log(element.finalRatioEvEbit);
-      console.log("stockArray: ", stockArray);
-      
+      // console.log(x)
+      // console.log(typeof (element.finalRatioEvEbit));
+      // console.log(element.finalRatioEvEbit);
+      console.log(stockArray);
+
     });
     //dbData.filter(e => e.finalRatioEvEbit > 0)
     res.json(stockArray);
   });
 });
-
-
 
 module.exports = router;
 

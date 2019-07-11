@@ -3,12 +3,15 @@ import { useAuth0 } from "../../react-auth0-wrapper";
 import { Link } from "react-router-dom";
 import "./style.css";
 
+const divStyle = {
+    opacity: 0.8,
+};
 
 const NavBar = () => {
     const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
 
     return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-dark">
+        <nav className="navbar navbar-expand-lg navbar-light bg-dark" style={divStyle}>
 
             {!isAuthenticated && (
                 <button type="button mr-auto" className="btn btn-success"
@@ -17,46 +20,44 @@ const NavBar = () => {
                             redirect_uri: window.location.origin
                         })
                     }>
-                    <a className="navbar-brand">Login</a>
+                    Login
                 </button>
             )}
 
-            {isAuthenticated && <button type="button" className="btn btn-success"
+            {/* {isAuthenticated && <button type="button" className="btn btn-success"
                 onClick={() => console.log("This should load top 30")}>
                 <a className="navbar-brand">Top 30</a>
-            </button>}
+            </button>} */}
 
-            {isAuthenticated && <button type="button" className="btn btn-success"
+            {/* {isAuthenticated && <button type="button" className="btn btn-success"
                 onClick={() => console.log("This should load portfolios")}>
                 <a className="navbar-brand">Portfolios</a>
-            </button>}
+            </button>} */}
 
             {isAuthenticated && <button type="button" className="btn btn-success"
                 onClick={() => logout()}>
-
-                <a className="navbar-brand">Log Out</a>
+                Log Out
             </button>}
 
-            {isAuthenticated && <button type="button" className="btn btn-success"
+            {/* {isAuthenticated && <button type="button" className="btn btn-success"
                 //Something needs to happen with the onClick below
                 onClick={() => console.log("Hello World")}>
                 <a className="navbar-brand">View Top 30 List</a>
-            </button>}
+            </button>} */}
 
-            {isAuthenticated && <button type="button" className="btn btn-success"
+            {/* {isAuthenticated && <button type="button" className="btn btn-success"
                 //Something needs to happen with the onClick below
                 onClick={() => console.log("Hello World")}>
                 <a className="navbar-brand">View Portfolios</a>
-            </button>}
+            </button>} */}
 
             {isAuthenticated && (
                 <span>
-                    <Link to="/home">Home</Link>
-                    <Link to="/profile">Profile</Link>
-                    <Link to="/external-api">External API</Link>
+                    <button type="button" className="btn btn-success"><Link to="/home">Top Stocks</Link></button>
+                    <button type="button" className="btn btn-success"><Link to="/profile">Profile</Link></button>
+                    <button type="button" className="btn btn-success"><Link to="/external-api">External API</Link></button>
                 </span>
             )}
-            
 
         </nav >
     );
